@@ -26,20 +26,21 @@ class LinkedList:
 
         print("Item", item, "inserted at end")
 
-    def insert_after_item(self, data, item_to_insert):
-        current = self.head
+    def insert_after_item(self, target_item, item_to_insert):
         n = Node(item_to_insert)
-        item = ""
-        while(current != None):
-            if(current.item == data):
-                item = data
-                n.next = current.next
-                current.next = n
-                print("Item", item, "inserted after item", item_to_insert)
-                break
-            current = current.next
-        if(item == ""):
-            print("Item", data, "is not in the list to insert after")
+        current = self.head
+        if self.head == None:
+            raise ValueError("Linked list is empty")
+        else:
+            while(current != None):
+                if current.item == target_item:
+                    n.next = current.next
+                    current.next = n
+                    print("Item", item_to_insert, "inserted after item", target_item)
+                    break
+                current = current.next
+            if current == None:
+                raise ValueError("Item", target_item, "is not in the list to insert after")
 
     def delete_from_start(self):
         if self.head == None:
@@ -94,12 +95,9 @@ class LinkedList:
              print("No item in the list")
 
         else:
-            self.head = Node(listSeq[0])
-            current = self.head
-            for item in lst[1:]:
-                    n = Node(item)
-                    current.next = n
-                    current = current.next
+            while(list):
+                item = list.pop()
+                self.insert_at_start(item)
             print("List", listSeq, "has inserted to the list")
 
     def print_list(self):
@@ -127,17 +125,17 @@ class SSLIterator:
         return data
 
 
-lst = [1,2]
+lst = [1,2,3,4,5]
 linkedList = LinkedList()
 linkedList.populate_from_list(lst)
 # linkedList.insert_at_start(0)
 # linkedList.insert_after_item(2,3)
-linkedList.insert_at_end(5)
+# linkedList.insert_at_end(5)
 # linkedList.delete_item(2)
 # linkedList.delete_from_start()
 # linkedList.delete_from_end()
 # linkedList.delete_from_start()
-# linkedList.print_list()
-for x in linkedList:
-    print(x)
+linkedList.print_list()
+# for x in linkedList:
+#     print(x)
 
