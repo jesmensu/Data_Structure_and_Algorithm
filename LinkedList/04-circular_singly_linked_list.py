@@ -4,40 +4,40 @@ class Node:
         self.next = None
 
 class LinkedList:
-    def __init__(self, head = None):
-        self.head = head
+    def __init__(self, last = None):
+        self.last = last
 
     def insert_at_start(self, item):
         n = Node(item)
-        if self.head == None:
+        if self.last == None:
             n.next = n
-            self.head = n
+            self.last = n
         else:
-            n.next = self.head.next
-            self.head.next = n
+            n.next = self.last.next
+            self.last.next = n
         
         print("Item", item, "inserted at start")
 
     def insert_at_end(self, item):
         n = Node(item)
-        if self.head == None:
+        if self.last == None:
             n.next = n
-            self.head = n
+            self.last = n
         else:
-            n.next = self.head.next
-            self.head.next = n
-            self.head = n
+            n.next = self.last.next
+            self.last.next = n
+            self.last = n
 
         print("Item", item, "inserted at end")
 
     def insert_after_item(self, data, item_to_insert):
-        if self.head == None:
+        if self.last == None:
             raise ValueError("No item to insert after")
         else:
-            current = self.head.next
+            current = self.last.next
             n = Node(item_to_insert)
             item = ""
-            while(current != self.head):
+            while(current != self.last):
                 if(current.item == data):
                     item = data
                     n.next = current.next
@@ -49,53 +49,53 @@ class LinkedList:
                 item = data
                 n.next = current.next
                 current.next = n
-                self.head = n
+                self.last = n
                 print("Item", item_to_insert, "inserted after item", item)
             if(item == ""):
                 print("Item", data, "is not in the list to insert after")
 
     def delete_from_start(self):
-        if self.head == None:
+        if self.last == None:
             print("No element to delete")
-        elif self.head == self.head.next:
-            item = self.head.next.item
-            self.head = None
+        elif self.last == self.last.next:
+            item = self.last.next.item
+            self.last = None
             print("Item", item, "deleted") 
         else:
-            item = self.head.next.item
-            self.head.next = self.head.next.next
+            item = self.last.next.item
+            self.last.next = self.last.next.next
             print("Item", item, "deleted")
 
     def delete_from_end(self):
-        if self.head == None:
+        if self.last == None:
             print("No element to delete")
-        elif self.head.next == self.head:
-            item = self.head.item
-            self.head = None
+        elif self.last.next == self.last:
+            item = self.last.item
+            self.last = None
             print("Item", item, "deleted")
         else:
-            current = self.head.next
-            while(current.next != self.head):
+            current = self.last.next
+            while(current.next != self.last):
                 current = current.next
-            item = self.head.item
-            current.next = self.head.next
-            self.head = current
+            item = self.last.item
+            current.next = self.last.next
+            self.last = current
             print("Item", item, "deleted")
 
     def delete_item(self, data):
-        if self.head == None:
+        if self.last == None:
             print("No element to delete")
-        elif self.head.next == self.head and self.head.item == data:
-            item = self.head.item
-            self.head = None
+        elif self.last.next == self.last and self.last.item == data:
+            item = self.last.item
+            self.last = None
             print("Item", item, "deleted")
         else:
-            current = self.head.next
+            current = self.last.next
             if current.item == data:
-                self.head.next = current.next
+                self.last.next = current.next
                 print("Item", data, "deleted")
             else:
-                while(current.next != self.head):
+                while(current.next != self.last):
                     if current.next.item == data:
                         current.next = current.next.next
                         print("Item", data, "deleted")
@@ -103,7 +103,7 @@ class LinkedList:
                     current = current.next
                 if current.next.item == data:
                     current.next = current.next.next
-                    self.head = current
+                    self.last = current
                     print("Item", data, "deleted")
                     return
                 print("Item", data, "is not in the list to delete")
@@ -114,33 +114,33 @@ class LinkedList:
              print("No item in the list")
 
         else:
-            self.head = Node(listSeq[0])
-            self.head.next = self.head
+            self.last = Node(listSeq[0])
+            self.last.next = self.last
             for item in lst[1:]:
                     n = Node(item)
-                    n.next = self.head.next
-                    self.head.next = n
-                    self.head = n
+                    n.next = self.last.next
+                    self.last.next = n
+                    self.last = n
             print("List", listSeq, "has inserted to the list")
 
     def print_list(self):
-        if self.head == None:
+        if self.last == None:
             print("No element in the linked list to print")
         else:
-            current = self.head.next
+            current = self.last.next
             print("Items in the list are:")
-            while current != self.head:
+            while current != self.last:
                 print(current.item)
                 current = current.next
             print(current.item)
 
     def __iter__(self):
-            return SSLIterator(self.head)
+            return SSLIterator(self.last)
 
 class SSLIterator:
-    def __init__(self, head):
-        self.current = head
-        self.last = head
+    def __init__(self, last):
+        self.current = last
+        self.last = last
         self.count = 0
         
     def __iter__(self):
