@@ -1,6 +1,5 @@
 import sys
 
-
 class Graph:
     def __init__(self, vertex_no) -> None:
         self.vertex_no = vertex_no
@@ -34,8 +33,8 @@ class Graph:
         dist = {}
         dist[src] = 0
         shortest_path_vertex = []
-        path = {}
-        path[src] = []
+        final_path = {}
+        final_path[src] = []
         for key, value in self.graph_adj_list.items():
             min_dist_vertex = self.get_min_dist_vertex(dist, shortest_path_vertex)
             shortest_path_vertex.append(min_dist_vertex)
@@ -43,11 +42,11 @@ class Graph:
                 new_dist = dist[min_dist_vertex] + weight
                 if v not in dist or dist[v]>new_dist:
                     dist[v] = new_dist
-                    path[v] = path[key] + [key]
+                    final_path[v] = final_path[key] + [key]
                    
 
         print(dist)
-        print(path)
+        print(final_path)
 
 g = Graph(5)
 g.add_edge(0,1, 3)
