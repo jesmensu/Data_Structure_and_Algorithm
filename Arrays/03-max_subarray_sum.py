@@ -41,3 +41,17 @@ def largestContiguousSum(arr) -> int:
 		return max_sum, start, end
 
 print(largestContiguousSum(arr))
+
+
+
+max_sum_current = 0
+max_sum_total = 0
+for i in arr:
+    max_sum_current = max_sum_current + i
+    if max_sum_current < 0:
+        max_sum_current = 0
+
+    if max_sum_total< max_sum_current:
+        max_sum_total = max_sum_current
+
+print(max_sum_total)
