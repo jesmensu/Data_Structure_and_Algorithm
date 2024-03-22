@@ -85,8 +85,7 @@ class Tree:
             else:
                 curr = curr.left
         if curr == None:
-            print("Key % d not found in\
-            the provided BST." % key)
+            print("Key % d not found in the provided BST." % key)
             return self.root
 
         if curr.left == None or curr.right == None:

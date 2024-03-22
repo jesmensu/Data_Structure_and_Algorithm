@@ -1,3 +1,5 @@
+# Find the largest word in the list whose all the prefix is in the list
+
 class Node:
     def __init__(self):
         self.children = [None]*26
@@ -28,25 +30,28 @@ class Trie:
             else:
                 return False 
 
-    def count_word(self):
-         count = 0
+    def word_with_all_prefix(self):
+         target_word = ""
+         temp_word = ""
          current = self.root
-         count = self.check_children(current, count)
-         return count
+         target_word = self.check_children(current, target_word, temp_word)
+         return target_word
     
-    def check_children(self, current, count):
+    def check_children(self, current, target_word, temp_word):
         children = current.children
         for i in range(26):
-            if children[i] != None:
-                if children[i].end_of_word == True:
-                    count += 1
-                count = self.check_children(children[i], count)
-
-        return count
+            if children[i] != None and children[i].end_of_word == True:
+                int_of_char = ord("a") + i
+                temp_word += chr(int_of_char)
+                if len(temp_word)> len(target_word):
+                    target_word = temp_word
+                target_word = self.check_children(children[i], target_word, temp_word)
+                temp_word = temp_word[:-1]
+        return target_word
 
         
 t = Trie()
-t.insert_word("the")
-t.insert_word("tree") 
-t.insert_word("art")
-print(t.count_word())
+words = ["a", "ap", "app", "appl", "pp", "apply", "apple"]
+for word in words:
+    t.insert_word(word)
+print(t.word_with_all_prefix())
