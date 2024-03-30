@@ -9,11 +9,11 @@ class Heap:
     def pos_lChild(self, pos):
         return 2 * pos + 1
     def pos_rChild(self, pos):
-        return (2 * pos) + 2
+        return ((2 * pos) + 2)
     def isLeaf(self, pos):
         return pos*2 + 1 > self.size
     def swap(self, fpos, spos):
-        self.Heap[fpos], self.Heap[spos] = self.Heap[spos], self.Heap[fpos]
+        self.heap[fpos], self.heap[spos] = self.heap[spos], self.heap[fpos]
 
     def insert_item(self, data):
         self.heap.append(data)
@@ -24,20 +24,35 @@ class Heap:
             current = (current-1)//2
 
     def heapify(self, pos):
-        if self.size > self.pos_rChild(pos):
-            if self.heap[pos] < self.heap[self.pos_lChild(pos)] or self.heap[pos] < self.heap[self.pos_rChild(pos)]:
-                if self.heap[self.pos_lChild(pos)] > self.heap[self.pos_rChild(pos)]:
-                    self.heap[pos], self.heap[self.pos_lChild(pos)] = self.heap[self.pos_lChild(pos)], self.heap[pos]
-                    self.heapify(self.pos_lChild(pos))
-                else:
-                    self.heap[pos], self.heap[self.pos_rChild(pos)] = self.heap[self.pos_rChild(pos)], self.heap[pos]
-                    self.heapify(2*pos+2)
+        largest_pos = pos
+        lchild_pos = self.pos_lChild(pos)
+        rchild_pos = self.pos_rChild(pos)
+        if lchild_pos<self.size and self.heap[largest_pos] < self.heap[lchild_pos]:
+            largest_pos = lchild_pos
+        if rchild_pos<self.size and self.heap[largest_pos] < self.heap[rchild_pos]:
+            largest_pos = rchild_pos  
+        if largest_pos != pos:
+            self.swap(pos, largest_pos)
+            self.heapify(largest_pos)
+
+          
+
+        # if self.size > self.pos_rChild(pos):
+        #     if self.heap[pos] < self.heap[self.pos_lChild(pos)] or self.heap[pos] < self.heap[self.pos_rChild(pos)]:
+        #         if self.heap[self.pos_lChild(pos)] > self.heap[self.pos_rChild(pos)]:
+        #             self.heap[pos], self.heap[self.pos_lChild(pos)] = self.heap[self.pos_lChild(pos)], self.heap[pos]
+        #             self.heapify(self.pos_lChild(pos))
+        #         else:
+        #             self.heap[pos], self.heap[self.pos_rChild(pos)] = self.heap[self.pos_rChild(pos)], self.heap[pos]
+        #             self.heapify(self.pos_rChild(pos))
         
-        elif self.size > self.pos_lChild(pos):
-            if self.heap[pos] < self.heap[self.pos_lChild(pos)]:
-                self.heap[pos], self.heap[self.pos_lChild(pos)] = self.heap[self.pos_lChild(pos)], self.heap[pos]
+        # elif self.size > self.pos_lChild(pos):
+        #     if self.heap[pos] < self.heap[self.pos_lChild(pos)]:
+        #         self.heap[pos], self.heap[self.pos_lChild(pos)] = self.heap[self.pos_lChild(pos)], self.heap[pos]
 
     def remove(self):
+        if self.size <= 0:
+            raise IndexError("Sequence out of range")
         self.heap[0] = self.heap[self.size-1]
         self.heap.pop(-1)
         self.size -= 1
