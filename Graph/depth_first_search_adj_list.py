@@ -31,6 +31,8 @@ class Graph:
                     stack.append(neibour_vertex)
                     visited.append(neibour_vertex)
 
+    def get_root_vertex(self):
+
 
 
 g = Graph(7)

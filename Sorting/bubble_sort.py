@@ -1,4 +1,5 @@
-# Bu
+# Brutforce 
+#  Time complexity O(n^2)
 
 lst = [6,7,3,2,9,5,8]
 for r in range(1,len(lst)):
@@ -9,6 +10,7 @@ for r in range(1,len(lst)):
 print(lst)
 
 # Modified Bubble sort
+#  best case Time complexity O(n) for sorted array
 
 lst = [6,7,3,2,9,5,8]
 flag = False

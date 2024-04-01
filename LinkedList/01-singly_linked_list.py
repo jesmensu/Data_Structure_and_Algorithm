@@ -68,10 +68,6 @@ class LinkedList:
     def delete_item(self, data):
         if self.head == None:
             print("No element to delete")
-        elif self.head.next == None and self.head.item == data:
-            item = self.head.item
-            self.head = None
-            print("Item", item, "deleted")
         else:
             current = self.head
             if current.item == data:
@@ -95,8 +91,8 @@ class LinkedList:
              print("No item in the list")
 
         else:
-            while(list):
-                item = list.pop()
+            while(listSeq):
+                item = listSeq.pop()
                 self.insert_at_start(item)
             print("List", listSeq, "has inserted to the list")
 
@@ -125,16 +121,16 @@ class SSLIterator:
         return data
 
 
-lst = [1,2,3,4,5]
+lst = [1,2,4,5]
 linkedList = LinkedList()
-linkedList.populate_from_list(lst)
-# linkedList.insert_at_start(0)
+# linkedList.populate_from_list(lst)
+linkedList.insert_at_start(0)
 # linkedList.insert_after_item(2,3)
-# linkedList.insert_at_end(5)
-# linkedList.delete_item(2)
-# linkedList.delete_from_start()
+linkedList.insert_at_end(5)
+# linkedList.delete_item(0)
+linkedList.delete_from_start()
 # linkedList.delete_from_end()
-# linkedList.delete_from_start()
+linkedList.delete_from_start()
 linkedList.print_list()
 # for x in linkedList:
 #     print(x)

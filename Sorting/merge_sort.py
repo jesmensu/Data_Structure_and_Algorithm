@@ -3,7 +3,7 @@ lst = [2,3,4,7,5,4,1,7]
 
 def merge_sort(lst):
     mid = len(lst)//2
-    if len(lst)<=1 or lst[mid-1]<lst[mid]:
+    if len(lst)<=1: #or lst[mid-1]<lst[mid]:
         return lst
     else:
         left_list = lst[:mid]

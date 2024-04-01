@@ -1,7 +1,7 @@
 
 class Queue:
     def __init__(self, items = []):
-        self.items = items
+        self.items = items  # [(item, prioroty)]
 
     def isEmpty(self):
         return len(self.items)==0
