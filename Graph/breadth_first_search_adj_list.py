@@ -32,6 +32,22 @@ class Graph:
                     visited.append(neibour_vertex)
 
 
+    def breadth_first_search(self, node):
+        queue = []
+        visited = []
+        queue.append(node)
+        visited.append(node)
+        while queue:
+            node = queue.pop(0)
+            print(node)
+            for nei_vertex, weight in self.graph_adj_list[node]:
+                if nei_vertex not in visited:
+                    queue.append(nei_vertex)
+                    visited.append(nei_vertex)
+
+
+
+
 
 g = Graph(5)
 g.add_edge(0,1)
@@ -41,4 +57,6 @@ g.add_edge(2,3)
 g.add_edge(3,4)
 g.print_adj_list()
 g.print_vertex_bfs(3)
+print()
 # print(g.has_edge(1,3))
+g.breadth_first_search(3)

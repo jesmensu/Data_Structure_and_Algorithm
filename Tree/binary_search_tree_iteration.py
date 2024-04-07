@@ -56,7 +56,7 @@ class Tree:
                     current = node.right
             else:
                 break
-
+ 
     def postorder_traverse(self):
         stack = []
         current = self.root

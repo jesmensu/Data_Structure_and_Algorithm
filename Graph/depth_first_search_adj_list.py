@@ -9,7 +9,7 @@ class Graph:
 
     def add_edge(self, u, v, weight = 7):
         self.graph_adj_list[u].append((v,weight))
-        self.graph_adj_list[v].append((u, weight))
+        # self.graph_adj_list[v].append((u, weight))
     
     def has_edge(self, u, v):
         for vertex, weight in self.graph_adj_list[u]:
@@ -18,20 +18,26 @@ class Graph:
         return False
     
     def print_vertex_dfs(self, node):
-        visited = []
+        visited = [False]*self.vertex_no
         stack = []
 
         stack.append(node)
-        visited.append(node)
+        visited[node] = True
         while stack:
             node = stack.pop()
             print(node, end=" ")
             for neibour_vertex, weight in self.graph_adj_list[node]:
-                if neibour_vertex not in visited:
+                if visited[neibour_vertex] == False:
                     stack.append(neibour_vertex)
-                    visited.append(neibour_vertex)
+                    visited[neibour_vertex] = True
 
-    def get_root_vertex(self):
+    def dfs(self,n,visited,stack):
+        visited[n] = True
+        for element, weight in self.graph_adj_list[n]:
+            if visited[element] == False:
+                self.dfs(element,visited,stack)
+        stack.insert(0,n)
+
 
 
 
@@ -49,3 +55,7 @@ g.add_edge(5,6)
 g.print_adj_list()
 g.print_vertex_dfs(0)
 # print(g.has_edge(1,3))
+visited = [False]*g.vertex_no
+stack = []
+g.dfs(0, visited, stack)
+print(stack)
