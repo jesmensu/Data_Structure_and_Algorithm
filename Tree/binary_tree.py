@@ -49,14 +49,25 @@ class BinaryTree:
         sum_left = self.tree_sum(current.left)
         sum_right = self.tree_sum(current.right)
         return sum_left + sum_right + current.data
+    
+    def leafSequence(self, root, leaf_root = []):
+        if root == None:
+            return []
+        elif root.left == None and root.right == None:
+            return [root.data]
+        else:
+            return self.leafSequence(root.left) + self.leafSequence(root.right)
 
         
 
 b = BinaryTree()
-root = b.build_tree([1,2,4,None, None, 5,None,None, 6,7,None,None,None])
-b.preorder_traverse(root)
-print(b.count_node(root))
-print(b.tree_height(root))
-print(b.tree_sum(root))
+# root = b.build_tree([1,2,4,None, None, 5,None,None, 6,7,None,None,None])
+# b.preorder_traverse(root)
+# print(b.count_node(root))
+# print(b.tree_height(root))
+# print(b.tree_sum(root))
+root = b.build_tree([1,2,4])
+print(b.leafSequence(root))
+
 
 
