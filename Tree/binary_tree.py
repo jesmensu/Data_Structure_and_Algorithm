@@ -50,7 +50,7 @@ class BinaryTree:
         sum_right = self.tree_sum(current.right)
         return sum_left + sum_right + current.data
     
-    def leafSequence(self, root, leaf_root = []):
+    def leafSequence(self, root):
         if root == None:
             return []
         elif root.left == None and root.right == None:

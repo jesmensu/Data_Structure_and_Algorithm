@@ -94,6 +94,27 @@ class DoublyLinkedList:
             if item == "":
                 print("Item", data, "is not in the list to delete")
 
+    def delete_item2(self, item):  # another process
+        if self.head == None:
+            raise IndexError("Index out of bound")
+        if self.head.item == item:
+            if self.head.next == None:
+                self.head = None
+                return
+            self.head = self.head.next
+            self.head.prev = None
+            return
+        current = self.head.next
+        while current.next != None:
+            if current.item == item:
+                current.prev.next = current.next
+                current.next.prev = current.prev
+                return
+            current = current.next
+        if current.item == item:
+            current.prev.next = None
+            return   
+        raise ValueError("Item not available") 
 
     def populate_from_list(self, listSeq):
         if len(listSeq) == 0:
@@ -115,6 +136,20 @@ class DoublyLinkedList:
             print(current.item)
             current = current.next
 
+    def reverse_linked_list(self):
+        if self.head == None:
+            raise IndexError("Empty list")
+        current = self.head
+        prev_node = None
+        while current != None:
+            next_node = current.next
+            current.next = prev_node 
+            if prev_node != None:
+                prev_node.prev = current
+            prev_node = current
+            current = next_node
+        self.head = prev_node
+
     def __iter__(self):
             return SSLIterator(self.head)
 
@@ -133,13 +168,13 @@ class SSLIterator:
         return data
 
 
-lst = []
+lst = [1,2]
 linkedList = DoublyLinkedList()
 linkedList.populate_from_list(lst)
-# linkedList.insert_at_start(0)
+linkedList.insert_at_start(0)
 linkedList.insert_after_item(1,3)
 # linkedList.insert_at_end(5)
-# linkedList.delete_item(2)
+linkedList.delete_item(0)
 # linkedList.delete_from_start()
 # linkedList.delete_from_end()
 # linkedList.delete_from_start()

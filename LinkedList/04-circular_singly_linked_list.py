@@ -82,32 +82,25 @@ class LinkedList:
             self.last = current
             print("Item", item, "deleted")
 
-    def delete_item(self, data):
+    def delete_item(self, item):
         if self.last == None:
-            print("No element to delete")
-        elif self.last.next == self.last and self.last.item == data:
-            item = self.last.item
+            raise IndexError("Index out of bound")
+        if self.last.next == self.last:   # if one element present
             self.last = None
-            print("Item", item, "deleted")
-        else:
-            current = self.last.next
-            if current.item == data:
-                self.last.next = current.next
-                print("Item", data, "deleted")
-            else:
-                while(current.next != self.last):
-                    if current.next.item == data:
-                        current.next = current.next.next
-                        print("Item", data, "deleted")
-                        return
-                    current = current.next
-                if current.next.item == data:
-                    current.next = current.next.next
-                    self.last = current
-                    print("Item", data, "deleted")
-                    return
-                print("Item", data, "is not in the list to delete")
-
+            return
+        if self.last.next.item == item:   # if first item to be delete
+            self.last.next = self.last.next.next
+            return
+        current = self.last.next
+        while current.next != self.last:     # for the middle item
+            if current.next.item == item:
+                current.next = current.next.next
+                return
+            current = current.next
+        if current.next.item == item:      # for the last item to be delete. which the last is pointed
+            current.next = current.next.next
+            self.last = current
+            return
 
     def populate_from_list(self, listSeq):
         if len(listSeq) == 0:
@@ -133,6 +126,18 @@ class LinkedList:
                 print(current.item)
                 current = current.next
             print(current.item)
+
+    def reverse_linked_list(self):
+        current = self.last.next
+        last = self.last.next
+        prev_node = self.last
+        while current != self.last:
+            next_node = current.next
+            current.next = prev_node
+            prev_node = current
+            current = next_node
+        current.next = prev_node
+        self.last = last
 
     def __iter__(self):
             return SSLIterator(self.last)
