@@ -152,6 +152,7 @@ class LinkedList:
         return reverse_list_head
     
     def reverseList2(self, head):
+        # optimized
         if head == None:
             return None
         current_node = head

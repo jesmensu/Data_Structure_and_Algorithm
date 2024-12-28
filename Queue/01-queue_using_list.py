@@ -1,3 +1,5 @@
+# the front is the end of the line where elements are removed, and the rear is the end where elements are added
+
 class Queue:
     def __init__(self, items = []):
         self.items = items

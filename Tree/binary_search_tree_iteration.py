@@ -57,6 +57,20 @@ class Tree:
             else:
                 break
  
+    def postorder_traversal(self):
+        stack = []
+        result = []
+        stack.append(self.root)
+        while(stack):
+            node = stack.pop()
+            result.insert(0, node.data)
+            if node.left != None:
+                stack.append(node.left)
+            if node.right != None:
+                stack.append(node.right)
+        
+        print(result)
+
     def postorder_traverse(self):
         stack = []
         current = self.root
@@ -74,6 +88,59 @@ class Tree:
             else:
                 print(current.data, end=" ")
                 current = None
+
+    def get_succesor(self, node):
+        curr = node
+        prev = None
+        while curr.left != None:
+            prev = curr
+            curr = curr.left
+        if curr.right != None:
+            prev.left = curr.right
+            curr.right = None
+        return curr
+
+    def get_predecessor(self, node):
+        curr = node
+        prev = None
+        while curr.right != None:
+            prev = curr
+            curr = curr.right
+        if curr.left != None:
+            prev.right = curr.left
+            curr.left = None
+        return curr
+    
+    def delete_item(self, key):
+        curr = self.root
+        prev = curr
+        # Find the node with key
+        while (curr != None):
+            if key < curr.data:
+                prev = curr
+                curr = curr.left
+            elif key > curr.data:
+                prev = curr
+                curr = curr.right
+            else:
+                break
+
+        # replace the node with succ or pred
+        targ_node = None
+        if curr != None:
+            if (curr.right == None and curr.left == None):
+                curr = None
+            else:
+                if curr.right != None:
+                    targ_node = self.get_succesor(curr.right)
+                elif curr.left != None:
+                    targ_node = self.get_predecessor(curr.left)
+                targ_node.right = curr.right
+                targ_node.left = curr.left
+                if prev.left == curr:
+                    prev.left = targ_node
+                else:
+                    prev.right = targ_node
 
     def deleteIterative(self, key):
         curr = self.root
@@ -133,12 +200,6 @@ class Tree:
                 p.left = temp.right
     
             else:
-    
-                # if the inorder successor was
-                # the root, then make the right child
-                # of the node to be deleted equal
-                # to the right child of the inorder
-                # successor.
                 curr.right = temp.right
     
             curr.data = temp.data
@@ -158,7 +219,8 @@ t.insert(50)
 t.insert(80)
 t.insert(100)
 t.insert(70)
+t.deleteIterative(20)
 
-t.preorder_traverse()
-# t.inorder_traverse()
-t.postorder_traverse()
+# t.preorder_traverse()
+t.inorder_traverse()
+# t.postorder_traverse()

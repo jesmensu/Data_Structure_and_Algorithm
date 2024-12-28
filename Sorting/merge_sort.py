@@ -18,6 +18,24 @@ def merge(left_list,right_list):
 
         return lst_merge
 
+def merge(lst_left, lst_right):
+    merged_lst = []
+
+    while len(lst_left)>0 and len(lst_right)>0:
+        if lst_left[0] < lst_right[0]:
+            merged_lst.append(lst_left[0])
+            lst_left.pop(0)
+        else:
+            merged_lst.append(lst_right[0])
+            lst_right.pop(0) 
+
+    if len(lst_left)>0:
+        merged_lst.extend(lst_left)
+        del lst_left
+    elif len(lst_right)>0:
+        merged_lst.extend(lst_right)
+        del lst_right
+    return merged_lst
 
 def merge_sort(lst):
     mid = len(lst)//2

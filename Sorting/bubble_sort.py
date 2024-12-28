@@ -13,7 +13,6 @@ print(lst)
 #  best case Time complexity O(n) for sorted array
 
 lst = [6,7,3,2,9,5,8]
-flag = False
 for r in range(1,len(lst)):
     flag = False
     for j in range(len(lst)-r):

@@ -36,7 +36,7 @@ def two_point_subs(target_subs, lst):
         subs = lst[end] - lst[start]
         if subs == target_subs:
             result_list.append((lst[start], lst[end]))
-            if lst[start] == lst[start+1]:
+            if end < len(lst)-1 and lst[start] == lst[start+1]:
                 start += 1
             else:
                 end += 1

@@ -22,7 +22,7 @@ array1 = array('i', [10,20,30,40,50])
 for x in array1:      
    print(x)
 
-print (array1[0])
+print(array1[0])
 # print(array2[0])
 
 # operations
@@ -31,14 +31,17 @@ array1.remove(30)
 # print (array1.index(40))
 array1[2] = 80        #update
 
-T = [[11, 12, 5, 2], [15, 6,10,3], [10, 8, 12, 5], [12,15,8,6]]
+T = [["11", "12", "5", "2"], ["15", "6","10","3"]]
 S = np.array(T)
 
 a = T[: : -1]
-b = S[: : -1]
+b = S[1][: : -1]
 
 print(T[0][1])
 print(S[0,1])
 
-# print(a)
-# print(b)
+print(T)
+print(S)
+
+print(a)
+print(b)

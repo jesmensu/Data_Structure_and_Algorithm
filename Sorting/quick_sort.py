@@ -62,16 +62,15 @@ def quick_sort(list1, low, high):
         p = low+1
         q = high
         while(p<=q):
-            while p<=high and list1[p] < pivot:
+            while p<=high and list1[p] <= pivot:
                 p += 1
             while q>=low and list1[q] > pivot:
                 q -= 1
             if p<q:
                 list1[p], list1[q] = list1[q], list1[p]
         list1[low], list1[q] = list1[q], list1[low]
-        print(id(list1))
-        quick_sort(list1, low, q)
-        quick_sort(list1, p, high)
+        quick_sort(list1, low, q-1)
+        quick_sort(list1, q+1, high)
 
 mylist=[53,11,72,68,41,25,18,37,44,80]
 quick_sort(mylist, 0, len(mylist)-1)
