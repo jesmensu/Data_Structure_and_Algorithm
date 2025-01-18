@@ -16,14 +16,20 @@ class Heap:
         self.heap[fpos], self.heap[spos] = self.heap[spos], self.heap[fpos]
 
     def insert_item(self, data):
+        # bottom up approch
         self.heap.append(data)
         self.size += 1
-        current = self.size -1
-        while(self.heap[current] > self.heap[(current-1)//2] and current>=0):
-            self.heap[current], self.heap[(current-1)//2] = self.heap[(current-1)//2], self.heap[current]
-            current = (current-1)//2
+        pos = self.size -1
+        while(pos!=0):
+            p_pos = self.pos_parent(pos)
+            if self.heap[pos] < self.heap[p_pos]:
+                self.swap(pos, p_pos)
+                pos = p_pos
+            else:
+                break
 
     def heapify(self, pos):
+        # Top down approch. Every element will heapify through top down approach.
         largest_pos = pos
         lchild_pos = self.pos_lChild(pos)
         rchild_pos = self.pos_rChild(pos)
@@ -35,28 +41,15 @@ class Heap:
             self.swap(pos, largest_pos)
             self.heapify(largest_pos)
 
-          
-
-        # if self.size > self.pos_rChild(pos):
-        #     if self.heap[pos] < self.heap[self.pos_lChild(pos)] or self.heap[pos] < self.heap[self.pos_rChild(pos)]:
-        #         if self.heap[self.pos_lChild(pos)] > self.heap[self.pos_rChild(pos)]:
-        #             self.heap[pos], self.heap[self.pos_lChild(pos)] = self.heap[self.pos_lChild(pos)], self.heap[pos]
-        #             self.heapify(self.pos_lChild(pos))
-        #         else:
-        #             self.heap[pos], self.heap[self.pos_rChild(pos)] = self.heap[self.pos_rChild(pos)], self.heap[pos]
-        #             self.heapify(self.pos_rChild(pos))
-        
-        # elif self.size > self.pos_lChild(pos):
-        #     if self.heap[pos] < self.heap[self.pos_lChild(pos)]:
-        #         self.heap[pos], self.heap[self.pos_lChild(pos)] = self.heap[self.pos_lChild(pos)], self.heap[pos]
 
     def remove(self):
         if self.size <= 0:
             raise IndexError("Sequence out of range")
-        self.heap[0] = self.heap[self.size-1]
-        self.heap.pop(-1)
+        self.swap(0, self.size-1)
         self.size -= 1
+        item = self.heap.pop()
         self.heapify(0)
+        return item
 
     def heapify_list(self, lst):
         self.heap = lst

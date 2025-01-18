@@ -43,6 +43,19 @@ class Tree:
             result = self.search_items_range_rec(current.right, current.data, y, result)
         return result
 
+    def search_items_range2(self, node, x, y):
+        if node == None:
+            return
+        else:
+            if x <= node.data <= y:
+                print(node.data)
+                self.search_items_range(node.right, x, y)
+                self.search_items_range(node.left, x, y)
+            elif node.data < x:
+                self.search_items_range(node.right, x, y)
+            elif node.data > y:
+                self.search_items_range(node.left, x, y)
+
 
 t = Tree()
 t.insert(1)

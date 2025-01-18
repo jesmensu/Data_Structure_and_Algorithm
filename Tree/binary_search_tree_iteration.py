@@ -90,32 +90,36 @@ class Tree:
                 current = None
 
     def get_succesor(self, node):
-        curr = node
+        curr = node.right
         prev = None
         while curr.left != None:
             prev = curr
             curr = curr.left
-        if curr.right != None:
+        if prev != None:
             prev.left = curr.right
             curr.right = None
+        else:
+            node.right = None
         return curr
 
     def get_predecessor(self, node):
-        curr = node
+        curr = node.left
         prev = None
         while curr.right != None:
             prev = curr
             curr = curr.right
-        if curr.left != None:
+        if prev != None:
             prev.right = curr.left
             curr.left = None
+        else:
+            node.left = None
         return curr
     
     def delete_item(self, key):
         curr = self.root
-        prev = curr
+        prev = None
         # Find the node with key
-        while (curr != None):
+        while (curr != None and curr.data != key):
             if key < curr.data:
                 prev = curr
                 curr = curr.left
@@ -128,19 +132,20 @@ class Tree:
         # replace the node with succ or pred
         targ_node = None
         if curr != None:
-            if (curr.right == None and curr.left == None):
-                curr = None
-            else:
-                if curr.right != None:
-                    targ_node = self.get_succesor(curr.right)
-                elif curr.left != None:
-                    targ_node = self.get_predecessor(curr.left)
+            if curr.right != None:
+                targ_node = self.get_succesor(curr)
+            elif curr.left != None:
+                targ_node = self.get_predecessor(curr)
+            if targ_node != None:
                 targ_node.right = curr.right
                 targ_node.left = curr.left
-                if prev.left == curr:
-                    prev.left = targ_node
-                else:
-                    prev.right = targ_node
+
+            if prev == None:
+                self.root = targ_node
+            elif prev.left == curr:
+                prev.left = targ_node
+            else:
+                prev.right = targ_node
 
     def deleteIterative(self, key):
         curr = self.root
@@ -207,7 +212,8 @@ class Tree:
     
         return self.root
 
-            
+    def build_tree(self, nodes):
+        pass
             
         
 t = Tree()

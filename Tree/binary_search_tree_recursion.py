@@ -93,12 +93,19 @@ class Tree:
         elif key > node.data:
             node.right = self.rec_delete(node.right, key)
         else:
-            if node.left == None:
-                return node.right
-            if node.right == None:
-                return node.left
-            node.data = self.get_min(node.right).data
-            self.rec_delete(node.right, node.data)
+            if node.left == None and node.right == None: # if deleting node is leaf node
+                node = None
+            elif node.left == None and node.right != None:  # if only right node exists
+                temp = node.right
+                node = None
+                return temp
+            elif node.left != None and node.right == None: # if only left node exists
+                temp = node.left
+                node = None
+                return temp
+            else:                                          # If both left node and right node exists
+                node.data = self.get_min(node.right).data
+                node.right = self.rec_delete(node.right, node.data)
         return node
 
     
@@ -187,6 +194,6 @@ t.insert(47)
 # t.getMin()
 # t.getMax()
 # t.get_pred_succ(50)
-t.delete(50)
-# t.inorder_traverse()
-t.preorder_traverse()
+t.delete_item(20)
+t.inorder_traverse()
+# t.preorder_traverse()
