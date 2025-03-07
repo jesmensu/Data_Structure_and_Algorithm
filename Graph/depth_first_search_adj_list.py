@@ -31,13 +31,16 @@ class Graph:
                     stack.append(neibour_vertex)
                     visited[neibour_vertex] = True
 
-    def dfs(self,n,visited,stack):
+    def dfs_rec(self,n,visited):
         visited[n] = True
+        print(n, end = " ")
         for element, weight in self.graph_adj_list[n]:
             if visited[element] == False:
-                self.dfs(element,visited,stack)
-        stack.insert(0,n)
+                self.dfs_rec(element,visited)
 
+    def dfs(self,node):
+        visited = [False]*self.vertex_no
+        self.dfs_rec(0, visited)
 
 
 
@@ -55,7 +58,7 @@ g.add_edge(5,6)
 g.print_adj_list()
 g.print_vertex_dfs(0)
 # print(g.has_edge(1,3))
-visited = [False]*g.vertex_no
-stack = []
-g.dfs(0, visited, stack)
-print(stack)
+# visited = [False]*g.vertex_no
+# stack = []
+g.dfs(0)
+# print(stack)

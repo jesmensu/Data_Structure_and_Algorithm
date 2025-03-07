@@ -41,7 +41,7 @@ class Tree:
 
     def rec_preorder_traverse(self, node):
         if node != None:
-            print(node.data)
+            print(node.data, end = ",")
             self.rec_preorder_traverse(node.left)
             self.rec_preorder_traverse(node.right)
 
@@ -187,7 +187,7 @@ t.insert(70)
 t.insert(45)
 t.insert(47)
 
-# t.preorder_traverse()
+t.preorder_traverse()
 # t.inorder_traverse()
 # t.postorder_traverse()
 # t.get_pred_succ(50)
@@ -195,5 +195,5 @@ t.insert(47)
 # t.getMax()
 # t.get_pred_succ(50)
 t.delete_item(20)
-t.inorder_traverse()
+# t.inorder_traverse()
 # t.preorder_traverse()

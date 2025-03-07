@@ -20,9 +20,6 @@ class Graph:
 
 
 
-        
-
-
 
 if __name__ == "__main__":
     edges = [[3, 0,1],
